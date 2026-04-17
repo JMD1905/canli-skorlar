@@ -14,58 +14,5 @@
 
 <script src="script.js"></script>
     
-<!-- 🦁 1. ADIM: EKSİK OLAN HTML PANELİ (Görünürlük İçin Gereklidir) -->
-<div id="gs-api-manager" style="position: fixed; bottom: 0; right: 30px; width: 280px; background: #1e1e1e; border-top: 4px solid #CE1126; border-radius: 12px 12px 0 0; padding: 15px; box-shadow: 0 -5px 20px rgba(0,0,0,0.4); z-index: 10000; font-family: sans-serif;">
-    <h4 style="margin: 0 0 10px 0; color: #FDB913; font-size: 0.85rem; text-align: center; text-transform: uppercase;">⚽ API Veri Hattı</h4>
-    <input type="password" id="gsApiKeyInput" placeholder="API Anahtarını Girin..." style="width: 100%; padding: 10px; margin-bottom: 8px; background: #2b2b2b; color: white; border: 1px solid #333; border-radius: 6px; outline: none;">
-    <button onclick="saveGSAPIKey()" style="width: 100%; background: #CE1126; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 0.7rem;">Sisteme Tanımla</button>
-    <div id="gsApiStatus" style="margin-top: 10px; font-size: 0.7rem; font-weight: bold; text-align: center; color: #888;"></div>
-</div>
-
-<!-- 🦁 2. ADIM: DÜZENLENMİŞ VE HATASIZ SCRIPT BLOĞU -->
-<script>
-    /**
-     * Bozuk kodların iyileştirilmesi [1]: 
-     * Fonksiyonun düzgün çalışması için HTML elementlerinin varlığı kontrol edilir.
-     */
-    function saveGSAPIKey() {
-        const keyInp = document.getElementById('gsApiKeyInput');
-        const statusDisplay = document.getElementById('gsApiStatus');
-        const key = keyInp ? keyInp.value.trim() : "";
-
-        if (!key) {
-            if(statusDisplay) {
-                statusDisplay.innerText = "⚠️ Lütfen bir anahtar girin!";
-                statusDisplay.style.color = "#FDB913";
-            }
-            return;
-        }
-
-        if(statusDisplay) {
-            statusDisplay.innerText = "⏳ Veri Hattı Test Ediliyor...";
-            statusDisplay.style.color = "white";
-        }
-
-        // Kaynaklardaki düzenleme kuralı uyarınca bağlantı simülasyonu [1]
-        setTimeout(() => {
-            localStorage.setItem('gs_live_api_key', key);
-            if(statusDisplay) {
-                statusDisplay.innerText = "✅ BAĞLANTI AKTİF: Canlı Veri Alınıyor";
-                statusDisplay.style.color = "#00ff00";
-            }
-            if(keyInp) keyInp.value = ""; 
-        }, 1500);
-    }
-
-    // Sayfa yüklendiğinde mevcut anahtarı kontrol eden iyileştirilmiş yapı [1]
-    window.addEventListener("load", function() {
-        const saved = localStorage.getItem('gs_live_api_key');
-        const statusDisplay = document.getElementById('gsApiStatus');
-        if (saved && statusDisplay) {
-            statusDisplay.innerText = "📡 Sistem Canlı Veriye Bağlı";
-            statusDisplay.style.color = "#00ff00";
-        }
-    });
-</script>
 </body>
 </html>
