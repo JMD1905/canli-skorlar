@@ -1,17 +1,36 @@
 body {
-background: #0f172a;
-color: white;
-font-family: Arial;
-text-align: center;
+    margin: 0;
+    background: #0b1220;
+    color: white;
+    font-family: Arial;
 }
 
 h1 {
-color: #38bdf8;
+    text-align: center;
+    padding: 20px;
+    color: #00d4ff;
+}
+
+#maclar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 20px;
 }
 
 .mac {
-background: #1e293b;
-margin: 10px;
-padding: 15px;
-border-radius: 10px;
+    background: #111a2e;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    transition: 0.3s;
+}
+
+.mac:hover {
+    transform: scale(1.05);
+    background: #16213a;
+}
+
+.mac h3 {
+    color: #00d4ff;
 }
