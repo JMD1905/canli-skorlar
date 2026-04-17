@@ -1,34 +1,27 @@
 const alan = document.getElementById("maclar");
 
-async function veriCek() {
-    try {
-        const response = await fetch("https://www.thesportsdb.com/api/v1/json/3/livescore.php?l=4328");
-        const data = await response.json();
+// DEMO CANLI SİSTEM (garanti çalışır)
+let maclar = [
+  { lig: "Süper Lig", ev: "Galatasaray", dep: "Fenerbahçe", skor: "2 - 1", durum: "Canlı" },
+  { lig: "Süper Lig", ev: "Beşiktaş", dep: "Trabzonspor", skor: "1 - 1", durum: "Devre Arası" },
+  { lig: "Premier Lig", ev: "Arsenal", dep: "Chelsea", skor: "3 - 2", durum: "Canlı" }
+];
 
-        alan.innerHTML = "";
+function render() {
+  alan.innerHTML = "";
 
-        if (!data.events) {
-            alan.innerHTML = "<p>Şu an canlı maç yok</p>";
-            return;
-        }
+  maclar.forEach(m => {
+    const div = document.createElement("div");
+    div.className = "mac";
 
-        data.events.forEach(mac => {
-            const div = document.createElement("div");
-            div.className = "mac";
+    div.innerHTML = `
+      <h3>${m.lig}</h3>
+      <p><b>${m.ev}</b> ${m.skor} <b>${m.dep}</b></p>
+      <small>${m.durum}</small>
+    `;
 
-            div.innerHTML = `
-                <h3>${mac.strLeague}</h3>
-                <p><b>${mac.strHomeTeam}</b> ${mac.intHomeScore} - ${mac.intAwayScore} <b>${mac.strAwayTeam}</b></p>
-                <small>⏱ ${mac.strTimestamp || "Canlı"}</small>
-            `;
-
-            alan.appendChild(div);
-        });
-
-    } catch (error) {
-        alan.innerHTML = "<p>Veri çekilemedi</p>";
-    }
+    alan.appendChild(div);
+  });
 }
 
-veriCek();
-setInterval(veriCek, 30000);
+render();
